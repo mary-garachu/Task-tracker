@@ -1,23 +1,43 @@
-import logo from './logo.svg';
 import './App.css';
+import Header from './components/Header';
+import Tasks from './components/Tasks';
+import { useState } from "react";
 
 function App() {
+  const [tasks, setTasks] = useState([
+    {
+      id: 1,
+      text: "do the dishes",
+      day: "Monday",
+      reminder: "true",
+    },
+    {
+      id: 2,
+      text: "update CV",
+      day: "Tuesday",
+      reminder: "false",
+    },
+    {
+      id: 3,
+      text: "babys checkup",
+      day: "Wednesday",
+      reminder: "false",
+    },
+  ])
+
+ const deleteTask =(id) => {
+    setTasks(tasks.filter((task) => task.id !== id
+    ))
+  }
+
+  const onDoubleClick = () => {
+    
+  }
+  
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className='container'>
+      <Header text = {'Task Tracker'} />
+      { tasks.length > 0 ? <Tasks tasks={tasks} onDelete = {deleteTask} /> : 'There are no tasks'}
     </div>
   );
 }
